@@ -39,7 +39,7 @@ public class CPFValidator {
             if(factor > 1) total += Integer.parseInt(digit) * factor --;
         }
         int rest = total % 11;
-        return (rest < 11) ? 0 : (11 - rest);
+        return (rest < 2) ? 0 : (11 - rest);
     }
 
     private String extractVerifiesDigit(){
