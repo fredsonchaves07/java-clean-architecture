@@ -8,6 +8,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        CPFValidator cpfValidator = new CPFValidator("935.411.347-80");
+        cpfValidator.validate();
+
     }
 }
