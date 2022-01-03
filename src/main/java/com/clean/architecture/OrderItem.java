@@ -11,4 +11,8 @@ public class OrderItem {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public double getTotal(){
+        return this.price * this.quantity;
+    }
 }

@@ -31,4 +31,15 @@ public class OrderTest {
         order.addItem(new Item("3", "Instrumentos Musicais", "Guitarra", 30), 3);
         assertEquals(6090, order.getTotal(), 0);
     }
+
+    @Test
+    public void shouldCreateOrderWith3ItemsWithDescountCoupon() throws Exception{
+        order = new Order("298.585.540-36");
+        order.addItem(new Item("1", "Instrumentos Musicais", "Guitarra", 1000), 1);
+        order.addItem(new Item("2", "Instrumentos Musicais", "Amplificador", 5000), 1);
+        order.addItem(new Item("3", "Instrumentos Musicais", "Guitarra", 30), 3);
+        order.addCoupon(new Coupon("VALE20", 20));
+        assertEquals(4872, order.getTotal(), 0);
+    }
+
 }
