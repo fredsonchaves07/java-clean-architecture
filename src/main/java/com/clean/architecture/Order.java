@@ -1,5 +1,6 @@
 package com.clean.architecture;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Order {
@@ -7,14 +8,24 @@ public class Order {
     private CPF cpf;
     private ArrayList<OrderItem> orderItems;
     private Coupon coupon;
+    private LocalDate issueDate;
+    private double freight;
     
+    public Order(String cpf, LocalDate issueDate) throws Exception{
+        this.cpf = new CPF(cpf);
+        this.orderItems = new ArrayList<>();
+        this.issueDate = issueDate;
+    }
+
     public Order(String cpf) throws Exception{
         this.cpf = new CPF(cpf);
-        this.orderItems = new ArrayList<OrderItem>();
+        this.orderItems = new ArrayList<>();
+        this.issueDate = LocalDate.now();
     }
 
     public void addItem(Item item, int quantity){
-        this.orderItems.add(new OrderItem(item.idItem, item.price, quantity));
+        this.freight += item.getFreight() * quantity;
+        this.orderItems.add(new OrderItem(item.getIdItem(), item.getPrice(), quantity));
     }
 
     public double getTotal(){
@@ -29,6 +40,12 @@ public class Order {
     }
 
     public void addCoupon(Coupon coupon){
-        this.coupon = coupon;
+        if(!coupon.isExpired(this.issueDate)){
+            this.coupon = coupon;
+        }
+    }
+
+    public double getFreight() {
+        return this.freight;
     }
 }
