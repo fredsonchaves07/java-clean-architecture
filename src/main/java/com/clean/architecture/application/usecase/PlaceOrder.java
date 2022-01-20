@@ -1,10 +1,13 @@
 package com.clean.architecture.application.usecase;
 
+import com.clean.architecture.application.dto.ItemInput;
+import com.clean.architecture.application.dto.PlaceOrderInput;
+import com.clean.architecture.application.dto.PlaceOrderOutput;
+import com.clean.architecture.application.dto.PlaceOrderOutputAssembler;
 import com.clean.architecture.domain.repository.ItemRepository;
 import com.clean.architecture.domain.repository.OrderRepository;
 import com.clean.architecture.domain.entities.Item;
 import com.clean.architecture.domain.entities.Order;
-import com.clean.architecture.domain.entities.OrderItem;
 
 public class PlaceOrder {
 
@@ -16,13 +19,13 @@ public class PlaceOrder {
         this.orderRepository = orderRepository;
     }
 
-    public double execute(input) {
-        Order order = new Order(input.cpf);
-        for (OrderItem orderItem : input.orderItems) {
-            Item item = this.itemRepository.findById(orderItem.idItem);
-            order.addItem(item, orderItem.quantity);
+    public PlaceOrderOutput execute(PlaceOrderInput input) throws Exception {
+        Order order = new Order(input.getCpf());
+        for (ItemInput orderItem : input.getItems()) {
+            Item item = this.itemRepository.findById(orderItem.getIdItem());
+            order.addItem(item, orderItem.getQuantity());
         }
         this.orderRepository.saveOrder(order);
-        return order.getTotal();
+        return PlaceOrderOutputAssembler.assembly(order);
     }
 }
