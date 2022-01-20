@@ -1,7 +1,8 @@
-package com.clean.architecture;
+package com.clean.architecture.unit;
 
 import static org.junit.Assert.assertEquals;
 
+import com.clean.architecture.domain.entities.Item;
 import org.junit.Test;
 
 public class ItemTest {

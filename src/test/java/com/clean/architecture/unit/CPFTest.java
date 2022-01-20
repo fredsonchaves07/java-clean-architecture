@@ -1,8 +1,9 @@
-package com.clean.architecture;
+package com.clean.architecture.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.clean.architecture.domain.entities.CPF;
 import org.junit.Test;
 
 public class CPFTest {

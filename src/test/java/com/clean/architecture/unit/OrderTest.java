@@ -1,10 +1,13 @@
-package com.clean.architecture;
+package com.clean.architecture.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 
+import com.clean.architecture.domain.entities.Coupon;
+import com.clean.architecture.domain.entities.Item;
+import com.clean.architecture.domain.entities.Order;
 import org.junit.Test;
 
 public class OrderTest {

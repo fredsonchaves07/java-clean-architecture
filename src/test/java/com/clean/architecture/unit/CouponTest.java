@@ -1,10 +1,11 @@
-package com.clean.architecture;
+package com.clean.architecture.unit;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 
+import com.clean.architecture.domain.entities.Coupon;
 import org.junit.Test;
 
 public class CouponTest {

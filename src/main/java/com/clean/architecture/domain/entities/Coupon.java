@@ -1,4 +1,4 @@
-package com.clean.architecture;
+package com.clean.architecture.domain.entities;
 
 
 import java.time.LocalDate;
