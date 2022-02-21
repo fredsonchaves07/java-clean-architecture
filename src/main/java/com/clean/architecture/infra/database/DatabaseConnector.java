@@ -1,6 +1,10 @@
 package com.clean.architecture.infra.database;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public interface DatabaseConnector {
 
-    void query(String statement, String params);
+    ResultSet query(String statement, Object[] params) throws SQLException;
 }

@@ -1,6 +1,7 @@
 package com.clean.architecture.domain.entities;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Order {
@@ -10,9 +11,18 @@ public class Order {
     private Coupon coupon;
     private LocalDate issueDate;
     private double freight;
+    private OrderCode code;
     
-    public Order(String cpf, LocalDate issueDate) throws Exception{
+    public Order(String cpf, LocalDate issueDate, Integer sequence) throws Exception{
         this.cpf = new CPF(cpf);
+        this.code = new OrderCode(issueDate, sequence);
+        this.orderItems = new ArrayList<>();
+        this.issueDate = issueDate;
+    }
+
+    public Order(String cpf, LocalDate issueDate) throws Exception {
+        this.cpf = new CPF(cpf);
+        this.code = new OrderCode(issueDate, 1);
         this.orderItems = new ArrayList<>();
         this.issueDate = issueDate;
     }
@@ -21,6 +31,7 @@ public class Order {
         this.cpf = new CPF(cpf);
         this.orderItems = new ArrayList<>();
         this.issueDate = LocalDate.now();
+        this.code = new OrderCode(this.issueDate, 1);
     }
 
     public void addItem(Item item, int quantity){
@@ -47,5 +58,29 @@ public class Order {
 
     public double getFreight() {
         return this.freight;
+    }
+
+    public String getCode() {
+        return code.getCode();
+    }
+
+    public String getCpf() {
+        return cpf.getCpf();
+    }
+
+    public LocalDate getIssueDate() {
+        return issueDate;
+    }
+
+    public Coupon getCoupon() {
+        return coupon;
+    }
+
+    public Integer getSequence() {
+        return code.getSequence();
+    }
+
+    public ArrayList<OrderItem> getOrderItems() {
+        return this.orderItems;
     }
 }

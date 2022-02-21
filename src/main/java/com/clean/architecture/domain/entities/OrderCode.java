@@ -17,4 +17,8 @@ public class OrderCode {
         String sequence8Char = String.format("%08d", sequence);
         return year + sequence8Char;
     }
+
+    public Integer getSequence() {
+        return sequence;
+    }
 }

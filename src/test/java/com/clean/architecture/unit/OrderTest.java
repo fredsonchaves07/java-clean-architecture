@@ -65,4 +65,13 @@ public class OrderTest {
         order.addItem(new Item("3", "Instrumentos Musicais", "Guitarra", 30, 10, 10, 10, 0.9), 3);
         assertEquals(260, order.getFreight(), 0);
     }
+
+    @Test
+    public void shouldCreateOrderWithOrderCode() throws Exception {
+        order = new Order("298.585.540-36", LocalDate.of(2021, 3, 1));
+        order.addItem(new Item("1", "Instrumentos Musicais", "Guitarra", 1000, 100, 30, 10, 3), 1);
+        order.addItem(new Item("2", "Instrumentos Musicais", "Amplificador", 5000, 100, 50, 50, 20), 1);
+        order.addItem(new Item("3", "Instrumentos Musicais", "Guitarra", 30, 10, 10, 10, 0.9), 3);
+        assertEquals("202100000001", order.getCode());
+    }
 }

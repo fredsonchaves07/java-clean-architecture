@@ -5,11 +5,13 @@ public class CPF {
     private int firstDigit;
     private int secondDigit;
     private int CPF_LENGTH = 11;
+    private String cpf;
 
     public CPF(String cpf) throws Exception{
         if(!this.validate(cpf)){
             throw new Exception("CPF Invalid");
         }
+        this.cpf = cpf;
     }
 
 
@@ -64,5 +66,9 @@ public class CPF {
 
     private String extractVerifiesDigit(String cpf){
         return cpf.substring(9);
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 }
