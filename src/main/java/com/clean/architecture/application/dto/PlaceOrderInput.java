@@ -51,4 +51,8 @@ public class PlaceOrderInput {
     public LocalDate getIssueDate() {
         return issueDate;
     }
+
+    public String getCoupon() {
+        return coupon;
+    }
 }

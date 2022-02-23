@@ -6,6 +6,7 @@ import com.clean.architecture.application.dto.PlaceOrderOutput;
 import com.clean.architecture.application.usecase.PlaceOrder;
 import com.clean.architecture.domain.entities.Order;
 import com.clean.architecture.infra.database.DatabaseConnectionAdapter;
+import com.clean.architecture.infra.repository.database.CouponRepositoryDatabase;
 import com.clean.architecture.infra.repository.database.OrderRepositoryDatabase;
 import com.clean.architecture.infra.repository.database.ItemRepositoryDatabase;
 import org.junit.Test;
@@ -25,9 +26,9 @@ public class PlaceOrderTest {
         items.add(new ItemInput("1", 1));
         items.add(new ItemInput("2", 1));
         items.add(new ItemInput("3", 3));
-        PlaceOrder placeOrder = new PlaceOrder(new ItemRepositoryDatabase(new DatabaseConnectionAdapter()), new OrderRepositoryDatabase(new DatabaseConnectionAdapter()));
-        PlaceOrderOutput output = placeOrder.execute(new PlaceOrderInput("847.903.332-05", items, LocalDate.of(2021, 3, 1)), "VALE20");
-        assertEquals(6090, output.getTotal(), 0);
-        assertEquals("202100000001", output.getCode());
+        PlaceOrder placeOrder = new PlaceOrder(new ItemRepositoryDatabase(new DatabaseConnectionAdapter()), new OrderRepositoryDatabase(new DatabaseConnectionAdapter()), new CouponRepositoryDatabase(new DatabaseConnectionAdapter()));
+        PlaceOrderOutput output = placeOrder.execute(new PlaceOrderInput("847.903.332-05", items, LocalDate.of(2022, 10, 10), "VALE20"));
+        assertEquals(4872, output.getTotal(), 0);
+        assertEquals("202200000001", output.getCode());
     }
 }

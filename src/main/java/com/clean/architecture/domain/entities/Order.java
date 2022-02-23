@@ -72,8 +72,8 @@ public class Order {
         return issueDate;
     }
 
-    public Coupon getCoupon() {
-        return coupon;
+    public String getCoupon() {
+        return coupon.toString();
     }
 
     public Integer getSequence() {
