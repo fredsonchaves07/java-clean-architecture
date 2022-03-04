@@ -27,6 +27,16 @@ public class Coupon {
         return this.expireDate.isBefore(today);
     }
 
+    public boolean isValid() {
+        LocalDate today = LocalDate.now();
+        return !expireDate.isBefore(today);
+    }
+
+    public boolean isValid(LocalDate today) {
+        return !expireDate.isBefore(today);
+    }
+
+
     @Override
     public String toString() {
         return code;
