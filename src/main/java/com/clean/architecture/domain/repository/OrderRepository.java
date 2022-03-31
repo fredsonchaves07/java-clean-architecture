@@ -7,4 +7,5 @@ import java.sql.SQLException;
 public interface OrderRepository {
 
     void saveOrder(Order order) throws SQLException;
+    Order getByCode(String code) throws Exception;
 }
