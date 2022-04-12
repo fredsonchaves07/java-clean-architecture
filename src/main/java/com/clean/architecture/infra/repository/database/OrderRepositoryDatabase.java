@@ -44,29 +44,12 @@ public class OrderRepositoryDatabase implements OrderRepository {
     }
 
     @Override
-    public Order getByCode(String code) throws Exception {
-        String orderId = null;
-        Order order = null;
-        ResultSet resultSet = databaseConnector.query("""
-                SELECT * FROM ccca.order WHERE code = ?
-                """, new Object[]{code});
+    public Integer count() throws SQLException {
+        Integer count = null;
+        ResultSet resultSet = databaseConnector.query("SELECT count(*)::int as count from ccca.order", new Object[]{});
         while (resultSet.next()) {
-            orderId = resultSet.getString("id");
-            order = new Order(resultSet.getString("cpf"), resultSet.getDate("issue_date").toLocalDate(), resultSet.getInt("sequence"));
+            count = resultSet.getInt("count");
         }
-        resultSet = databaseConnector.query("""
-                SELECT * FROM ccca.order_item WHERE id_order = ?
-                """, new Object[]{orderId});
-        while (resultSet.next()) {
-            ResultSet itemData = databaseConnector.query("""
-                    SELECT * FROM ccca.items WHERE id_item = ?
-                    """, new Object[]{orderId});
-            Item item;
-            while (itemData.next()) {
-                item = new Item(itemData.getString("id"), itemData.getString("category"), itemData.getString("description"), itemData.getDouble("price"), itemData.getDouble("width"), itemData.getDouble("height"), itemData.getDouble("length"), itemData.getDouble("weight"));
-                order.addItem(item, itemData.getInt("quantity"));
-            }
-        }
-        return order;
+        return count;
     }
 }

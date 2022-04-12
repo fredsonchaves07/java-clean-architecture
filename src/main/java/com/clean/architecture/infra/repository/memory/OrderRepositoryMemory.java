@@ -15,4 +15,9 @@ public class OrderRepositoryMemory implements OrderRepository {
     public void saveOrder(Order order) {
         this.orders.add(order);
     }
+
+    @Override
+    public Integer count() {
+        return orders.size();
+    }
 }
