@@ -8,4 +8,5 @@ public interface OrderRepository {
 
     void saveOrder(Order order) throws SQLException;
     Integer count() throws SQLException;
+    Order getByCode(String code);
 }

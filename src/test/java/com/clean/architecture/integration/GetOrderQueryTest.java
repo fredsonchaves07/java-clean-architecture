@@ -1,8 +1,11 @@
 package com.clean.architecture.integration;
 
+import com.clean.architecture.application.dto.GetOrderOutput;
 import com.clean.architecture.application.dto.ItemInput;
 import com.clean.architecture.application.dto.PlaceOrderInput;
 import com.clean.architecture.application.dto.PlaceOrderOutput;
+import com.clean.architecture.application.query.GetOrderQuery;
+import com.clean.architecture.application.usecase.GetOrder;
 import com.clean.architecture.application.usecase.PlaceOrder;
 import com.clean.architecture.domain.repository.CouponRepository;
 import com.clean.architecture.domain.repository.ItemRepository;
@@ -20,9 +23,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetOrderTest {
+public class GetOrderQueryTest {
 
     PlaceOrder placeOrder;
+    GetOrderQuery getOrderQuery;
 
     @Before
     public void init() throws SQLException {
@@ -31,6 +35,7 @@ public class GetOrderTest {
         OrderRepository orderRepository = new OrderRepositoryDatabase(databaseConnection);
         CouponRepository couponRepository = new CouponRepositoryDatabase(databaseConnection);
         placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+        getOrderQuery = new GetOrderQuery(databaseConnection);
     }
 
 
@@ -47,5 +52,7 @@ public class GetOrderTest {
                 "VALE20"
         );
         PlaceOrderOutput placeOrderOutput = placeOrder.execute(placeOrderInput);
+        GetOrderOutput getOrderOutput =  getOrderQuery.execute(placeOrderOutput.getCode());
+        System.out.println(getOrderOutput);
     }
 }

@@ -17,6 +17,11 @@ public class OrderRepositoryMemory implements OrderRepository {
     }
 
     @Override
+    public Order getByCode(String code) {
+        return null;
+    }
+
+    @Override
     public Integer count() {
         return orders.size();
     }

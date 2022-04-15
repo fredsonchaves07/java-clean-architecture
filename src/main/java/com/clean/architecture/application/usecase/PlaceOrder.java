@@ -25,7 +25,7 @@ public class PlaceOrder {
 
     public PlaceOrderOutput execute(PlaceOrderInput input) throws Exception {
         Integer sequence = orderRepository.count();
-        Order order = new Order(input.getCpf(), input.getIssueDate(), 1);
+        Order order = new Order(input.getCpf(), input.getIssueDate(), ++sequence);
         for (ItemInput orderItem : input.getItems()) {
             Item item = this.itemRepository.findById(orderItem.getIdItem());
             order.addItem(item, orderItem.getQuantity());

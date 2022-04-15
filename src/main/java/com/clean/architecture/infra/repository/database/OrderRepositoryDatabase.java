@@ -44,6 +44,11 @@ public class OrderRepositoryDatabase implements OrderRepository {
     }
 
     @Override
+    public Order getByCode(String code) {
+        return null;
+    }
+
+    @Override
     public Integer count() throws SQLException {
         Integer count = null;
         ResultSet resultSet = databaseConnector.query("SELECT count(*)::int as count from ccca.order", new Object[]{});
