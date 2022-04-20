@@ -22,6 +22,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 public class GetOrderTest {
 
     PlaceOrder placeOrder;
@@ -52,6 +54,7 @@ public class GetOrderTest {
         );
         PlaceOrderOutput placeOrderOutput = placeOrder.execute(placeOrderInput);
         GetOrderOutput getOrderOutput =  getOrderQuery.execute(placeOrderOutput.getCode());
-        System.out.println(getOrderOutput);
+        assertEquals(4872, getOrderOutput.getTotal(), 0);
+        assertEquals(280, getOrderOutput.getFreight(), 0);
     }
 }

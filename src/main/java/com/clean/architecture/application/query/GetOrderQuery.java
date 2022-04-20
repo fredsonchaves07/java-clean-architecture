@@ -20,7 +20,7 @@ public class GetOrderQuery {
     public GetOrderOutput execute(String code) throws SQLException {
         GetOrderOutput getOrderOutput = null;
         List<ItemOutput> items = new ArrayList<>();
-        ResultSet resultSetOrder =  databaseConnector.query("SELECT id, code, cpf FROM ccca.order WHERE code = ?", new String[] {code});
+        ResultSet resultSetOrder =  databaseConnector.query("SELECT id, code, cpf, total, freight FROM ccca.order WHERE code = ?", new String[] {code});
         while (resultSetOrder.next()) {
             ResultSet resultSetItems = databaseConnector.query("" +
                     "SELECT i.description, oi.quantity, oi.price " +
@@ -37,7 +37,9 @@ public class GetOrderQuery {
             getOrderOutput = new GetOrderOutput(
                     resultSetOrder.getString("code"),
                     resultSetOrder.getString("cpf"),
-                    items
+                    items,
+                    resultSetOrder.getDouble("total"),
+                    resultSetOrder.getDouble("freight")
             );
         }
         return getOrderOutput;
