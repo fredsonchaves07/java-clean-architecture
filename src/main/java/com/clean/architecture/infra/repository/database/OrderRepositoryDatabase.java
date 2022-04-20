@@ -21,15 +21,16 @@ public class OrderRepositoryDatabase implements OrderRepository {
     @Override
     public void saveOrder(Order order) throws SQLException {
         ResultSet resultSet = databaseConnector.query("""
-        INSERT INTO ccca.order (code, cpf, issue_date, freight, sequence, coupon)
-        VALUES (?, ?, ?, ?, ?, ?) RETURNING *
+        INSERT INTO ccca.order (code, cpf, issue_date, freight, sequence, coupon, total)
+        VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *
         """, new Object[]{
                 order.getCode(),
                 order.getCpf(),
                 order.getIssueDate(),
                 order.getFreight(),
                 order.getSequence(),
-                order.getCoupon()
+                order.getCoupon(),
+                order.getTotal()
         });
         while (resultSet.next()) {
             for(OrderItem orderItem : order.getOrderItems()) {

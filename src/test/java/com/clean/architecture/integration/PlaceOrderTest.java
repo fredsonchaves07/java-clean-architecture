@@ -27,7 +27,7 @@ public class PlaceOrderTest {
         items.add(new ItemInput("2", 1));
         items.add(new ItemInput("3", 3));
         PlaceOrder placeOrder = new PlaceOrder(new ItemRepositoryDatabase(new DatabaseConnectionAdapter()), new OrderRepositoryDatabase(new DatabaseConnectionAdapter()), new CouponRepositoryDatabase(new DatabaseConnectionAdapter()));
-        PlaceOrderOutput output = placeOrder.execute(new PlaceOrderInput("847.903.332-05", items, LocalDate.of(2022, 10, 10), "VALE20"));
+        PlaceOrderOutput output = placeOrder.execute(new PlaceOrderInput("847.903.332-05", items, LocalDate.of(2021, 10, 10), "VALE20"));
         assertEquals(4872, output.getTotal(), 0);
     }
 }

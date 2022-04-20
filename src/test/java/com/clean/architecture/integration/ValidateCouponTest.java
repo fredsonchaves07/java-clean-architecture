@@ -24,6 +24,6 @@ public class ValidateCouponTest {
     @Test
     public void shouldValidateCoupon() throws SQLException {
         ValidateCoupon validateCoupon = new ValidateCoupon(couponRepository);
-        assertTrue(validateCoupon.execute("VALE20", LocalDate.of(2022, 2, 23)));
+        assertTrue(validateCoupon.execute("VALE20", LocalDate.of(2021, 10, 10)));
     }
 }

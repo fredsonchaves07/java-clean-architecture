@@ -47,7 +47,7 @@ public class GetOrderTest {
         PlaceOrderInput placeOrderInput = new PlaceOrderInput(
                 "847.903.332-05",
                 items,
-                LocalDate.of(2022, 10, 10),
+                LocalDate.of(2021, 10, 10),
                 "VALE20"
         );
         PlaceOrderOutput placeOrderOutput = placeOrder.execute(placeOrderInput);
