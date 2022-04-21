@@ -23,4 +23,9 @@ public class ItemOutput {
     public Double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return "item: " + description;
+    }
 }

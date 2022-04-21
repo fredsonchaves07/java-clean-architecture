@@ -3,8 +3,7 @@ package com.clean.architecture.integration;
 import com.clean.architecture.application.dto.GetOrderOutput;
 import com.clean.architecture.application.dto.ItemInput;
 import com.clean.architecture.application.dto.PlaceOrderInput;
-import com.clean.architecture.application.dto.PlaceOrderOutput;
-import com.clean.architecture.application.query.GetOrderQuery;
+import com.clean.architecture.application.query.GetOrdersQuery;
 import com.clean.architecture.application.usecase.PlaceOrder;
 import com.clean.architecture.domain.repository.CouponRepository;
 import com.clean.architecture.domain.repository.ItemRepository;
@@ -22,12 +21,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 public class GetOrderTest {
 
     PlaceOrder placeOrder;
-    GetOrderQuery getOrderQuery;
+    GetOrdersQuery getOrdersQuery;
 
     @Before
     public void init() throws SQLException {
@@ -36,7 +33,7 @@ public class GetOrderTest {
         OrderRepository orderRepository = new OrderRepositoryDatabase(databaseConnection);
         CouponRepository couponRepository = new CouponRepositoryDatabase(databaseConnection);
         placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
-        getOrderQuery = new GetOrderQuery(databaseConnection);
+        getOrdersQuery = new GetOrdersQuery(databaseConnection);
     }
 
 
@@ -52,9 +49,8 @@ public class GetOrderTest {
                 LocalDate.of(2021, 10, 10),
                 "VALE20"
         );
-        PlaceOrderOutput placeOrderOutput = placeOrder.execute(placeOrderInput);
-        GetOrderOutput getOrderOutput =  getOrderQuery.execute(placeOrderOutput.getCode());
-        assertEquals(4872, getOrderOutput.getTotal(), 0);
-        assertEquals(280, getOrderOutput.getFreight(), 0);
+        placeOrder.execute(placeOrderInput);
+        List<GetOrderOutput> getOrderOutput = getOrdersQuery.execute();
+        System.out.println(getOrderOutput);
     }
 }

@@ -1,6 +1,7 @@
 package com.clean.architecture.application.dto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GetOrderOutput {
@@ -25,5 +26,10 @@ public class GetOrderOutput {
 
     public Double getFreight() {
         return freight;
+    }
+
+    @Override
+    public String toString() {
+        return "code: " + code + " cpf: " + cpf + " items: " + items + " total: " + total + " freight: " + freight;
     }
 }
