@@ -12,6 +12,7 @@ import com.clean.architecture.domain.repository.ItemRepository;
 import com.clean.architecture.domain.repository.OrderRepository;
 import com.clean.architecture.infra.database.DatabaseConnectionAdapter;
 import com.clean.architecture.infra.database.DatabaseConnector;
+import com.clean.architecture.infra.factory.DatabaseRepositoryFactory;
 import com.clean.architecture.infra.repository.database.CouponRepositoryDatabase;
 import com.clean.architecture.infra.repository.database.ItemRepositoryDatabase;
 import com.clean.architecture.infra.repository.database.OrderRepositoryDatabase;
@@ -31,10 +32,7 @@ public class GetOrderQueryTest {
     @Before
     public void init() throws SQLException {
         DatabaseConnector databaseConnection = new DatabaseConnectionAdapter();
-        ItemRepository itemRepository = new ItemRepositoryDatabase(databaseConnection);
-        OrderRepository orderRepository = new OrderRepositoryDatabase(databaseConnection);
-        CouponRepository couponRepository = new CouponRepositoryDatabase(databaseConnection);
-        placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+        placeOrder = new PlaceOrder(new DatabaseRepositoryFactory(databaseConnection));
         getOrderQuery = new GetOrderQuery(databaseConnection);
     }
 
