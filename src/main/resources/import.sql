@@ -45,3 +45,5 @@ create table ccca.order_item (
 );
 
 create table ccca.order_view ( code text primary key, data jsonb);
+
+alter table ccca.order add column total number;
