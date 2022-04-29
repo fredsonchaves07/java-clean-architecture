@@ -35,7 +35,6 @@ public class Order {
     }
 
     public void addItem(Item item, int quantity){
-        this.freight += item.getFreight() * quantity;
         this.orderItems.add(new OrderItem(item.getIdItem(), item.getPrice(), quantity));
     }
 
@@ -58,6 +57,10 @@ public class Order {
 
     public double getFreight() {
         return this.freight;
+    }
+
+    public void setFreight(Double freight) {
+        this.freight = freight;
     }
 
     public String getCode() {
