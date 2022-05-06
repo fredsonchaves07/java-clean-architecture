@@ -1,6 +1,5 @@
 package com.clean.architecture.application.dto;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class SimulateFreightInput {
@@ -14,5 +13,4 @@ public class SimulateFreightInput {
     public List<ItemInput> getItems() {
         return items;
     }
-
 }

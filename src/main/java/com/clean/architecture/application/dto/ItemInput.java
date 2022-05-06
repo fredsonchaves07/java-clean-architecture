@@ -17,8 +17,4 @@ public class ItemInput {
     public Integer getQuantity() {
         return quantity;
     }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 }
