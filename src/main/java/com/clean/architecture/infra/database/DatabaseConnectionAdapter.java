@@ -2,16 +2,18 @@ package com.clean.architecture.infra.database;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
-public class DatabaseConnectionAdapter implements DatabaseConnector{
+public class DatabaseConnectionAdapter implements DatabaseConnector {
 
-    private String url = "jdbc:postgresql://localhost:5432/ccca";
-    private String user = "postgres";
-    private String password = "1234";
+    Properties properties = loadProperties();
+    String dbUrl = properties.getProperty("dburl");
+    String user = properties.getProperty("user");
+    String password = properties.getProperty("password");
     private Connection connection;
 
     public DatabaseConnectionAdapter() throws SQLException {
-        connection = DriverManager.getConnection(url, user, password);
+        connection = DriverManager.getConnection(dbUrl, user, password);
     }
 
     @Override
