@@ -18,12 +18,16 @@ public class GetOrdersQuery {
     }
 
     public List<GetOrderOutput> execute() throws SQLException {
+
+
+
+
         List<GetOrderOutput> getOrdersOutput = new ArrayList<>();
         GetOrderOutput getOrderOutput;
         List<ItemOutput> items = new ArrayList<>();
-        ResultSet resultSetOrder =  databaseConnector.query("SELECT id, code, cpf, total, freight FROM ccca.order", new Object[]{});
+        ResultSet resultSetOrder = (ResultSet) databaseConnector.query("SELECT id, code, cpf, total, freight FROM ccca.order", new Object[]{});
         while (resultSetOrder.next()) {
-            ResultSet resultSetItems = databaseConnector.query("" +
+            ResultSet resultSetItems = (ResultSet) databaseConnector.query("" +
                     "SELECT i.description, oi.quantity, oi.price " +
                     "FROM ccca.order_item oi " +
                     "JOIN ccca.item i ON (oi.id_item = i.id) " +
