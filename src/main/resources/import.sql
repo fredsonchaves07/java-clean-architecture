@@ -60,4 +60,4 @@ create table ccca.order_view
 );
 
 alter table ccca.order
-    add column total number;
+    add column total numeric;
