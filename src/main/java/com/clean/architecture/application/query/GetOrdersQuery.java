@@ -1,5 +1,6 @@
 package com.clean.architecture.application.query;
 
+import com.clean.architecture.application.dao.OrderDAO;
 import com.clean.architecture.application.dto.GetOrderOutput;
 import com.clean.architecture.application.dto.ItemOutput;
 import com.clean.architecture.infra.database.DatabaseConnector;
@@ -11,43 +12,21 @@ import java.util.List;
 
 public class GetOrdersQuery {
 
-    private DatabaseConnector databaseConnector;
+    private OrderDAO orderDAO;
 
-    public GetOrdersQuery(DatabaseConnector databaseConnector) {
-        this.databaseConnector = databaseConnector;
+    public GetOrdersQuery(OrderDAO orderDAO) {
+        this.orderDAO = orderDAO;
     }
 
     public List<GetOrderOutput> execute() throws SQLException {
-
-
-
-
-        List<GetOrderOutput> getOrdersOutput = new ArrayList<>();
-        GetOrderOutput getOrderOutput;
-        List<ItemOutput> items = new ArrayList<>();
-        ResultSet resultSetOrder = (ResultSet) databaseConnector.query("SELECT id, code, cpf, total, freight FROM ccca.order", new Object[]{});
-        while (resultSetOrder.next()) {
-            ResultSet resultSetItems = (ResultSet) databaseConnector.query("" +
-                    "SELECT i.description, oi.quantity, oi.price " +
-                    "FROM ccca.order_item oi " +
-                    "JOIN ccca.item i ON (oi.id_item = i.id) " +
-                    "WHERE id_order = ?", new Integer[] {resultSetOrder.getInt("id")});
-            while (resultSetItems.next()) {
-                items.add(new ItemOutput(
-                        resultSetItems.getString("description"),
-                        resultSetItems.getInt("quantity"),
-                        resultSetItems.getDouble("price")
-                ));
-            }
-            getOrderOutput = new GetOrderOutput(
-                    resultSetOrder.getString("code"),
-                    resultSetOrder.getString("cpf"),
-                    items,
-                    resultSetOrder.getDouble("total"),
-                    resultSetOrder.getDouble("freight")
-            );
-            getOrdersOutput.add(getOrderOutput);
+        List<OrderDTO> orderDTOS =  orderDAO.getOrders();
+        List<GetOrderOutput> orderOutputs = new ArrayList<>();
+        for (OrderDTO orderDTO : orderDTOS) {
+            List<OrderItemDTO> orderItemDTOS = orderDAO.getOrderItems(orderDTO.getId());
+            orderOutputs.add(new GetOrderOutput(
+                    orderDTO.getCode(), orderDTO.getCpf(), orderItemDTOS, orderDTO.getFreight(), orderDTO.getTotal()
+            ));
         }
-        return getOrdersOutput;
+        return orderOutputs;
     }
 }

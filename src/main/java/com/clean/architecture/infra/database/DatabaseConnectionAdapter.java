@@ -42,6 +42,13 @@ public class DatabaseConnectionAdapter implements DatabaseConnector {
         return preparedStatement.executeQuery();
     }
 
+    @Override
+    public ResultSet query(String statement) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(statement);
+        return preparedStatement.executeQuery();
+    }
+
+    //TODO -> Colocar esses métodos na interface
     public void closeStatement(Statement statement) throws SQLException {
         if (statement != null) statement.close();
     }
