@@ -20,7 +20,7 @@ public class ItemRepositoryDatabase implements ItemRepository {
     @Override
     public Item findById(String idItem) throws SQLException {
         Item item = null;
-        ResultSet resultSet = databaseConnector.query("SELECT * FROM ccca.item WHERE id =?", new Integer[]{Integer.parseInt(idItem)});
+        ResultSet resultSet = (ResultSet) databaseConnector.query("SELECT * FROM ccca.item WHERE id =?", new Integer[]{Integer.parseInt(idItem)});
         while (resultSet.next()) {
             item = new Item(resultSet.getString("id"), resultSet.getString("category"), resultSet.getString("description"), resultSet.getDouble("price"), resultSet.getDouble("width"), resultSet.getDouble("height"), resultSet.getDouble("length"), resultSet.getDouble("weight"));
         }

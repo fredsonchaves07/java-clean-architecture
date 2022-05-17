@@ -8,8 +8,6 @@ import java.util.List;
 
 public class OrderDAODatabase implements OrderDAO {
 
-    private
-
     @Override
     public List<OrderDTO> getOrders() {
         return null;

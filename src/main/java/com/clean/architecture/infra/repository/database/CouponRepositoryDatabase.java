@@ -22,7 +22,7 @@ public class CouponRepositoryDatabase implements CouponRepository {
     @Override
     public Coupon findByCode(String codItem) throws SQLException {
         Coupon coupon = null;
-        ResultSet resultSet = databaseConnector.query("SELECT * FROM ccca.coupon WHERE code =?", new String[]{codItem});
+        ResultSet resultSet = (ResultSet) databaseConnector.query("SELECT * FROM ccca.coupon WHERE code = ?", new String[]{codItem});
         while (resultSet.next()) {
             coupon = new Coupon(resultSet.getString("code"), resultSet.getInt("percentage"), resultSet.getDate("expire_date").toLocalDate());
         }

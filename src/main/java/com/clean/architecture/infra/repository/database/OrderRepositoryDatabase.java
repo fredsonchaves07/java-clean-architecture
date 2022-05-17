@@ -20,7 +20,7 @@ public class OrderRepositoryDatabase implements OrderRepository {
 
     @Override
     public void saveOrder(Order order) throws SQLException {
-        ResultSet resultSet = databaseConnector.query("""
+        ResultSet resultSet = (ResultSet) databaseConnector.query("""
         INSERT INTO ccca.order (code, cpf, issue_date, freight, sequence, coupon, total)
         VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *
         """, new Object[]{
@@ -52,7 +52,7 @@ public class OrderRepositoryDatabase implements OrderRepository {
     @Override
     public Integer count() throws SQLException {
         Integer count = null;
-        ResultSet resultSet = databaseConnector.query("SELECT count(*)::int as count from ccca.order", new Object[]{});
+        ResultSet resultSet = (ResultSet) databaseConnector.query("SELECT count(*)::int as count from ccca.order", new Object[]{});
         while (resultSet.next()) {
             count = resultSet.getInt("count");
         }
