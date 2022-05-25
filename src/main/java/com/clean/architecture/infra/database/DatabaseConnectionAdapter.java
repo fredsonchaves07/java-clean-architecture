@@ -3,18 +3,17 @@ package com.clean.architecture.infra.database;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Properties;
 
 public class DatabaseConnectionAdapter implements DatabaseConnector {
 
-    Properties properties = loadProperties();
+    private Properties properties = loadProperties();
 
-    String dbUrl = properties.getProperty("dburl");
+    private String dbUrl = properties.getProperty("dburl");
 
-    String user = properties.getProperty("user");
+    private String user = properties.getProperty("user");
 
-    String password = properties.getProperty("password");
+    private String password = properties.getProperty("password");
 
     private Connection connection;
 
@@ -46,14 +45,5 @@ public class DatabaseConnectionAdapter implements DatabaseConnector {
     public ResultSet query(String statement) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(statement);
         return preparedStatement.executeQuery();
-    }
-
-    //TODO -> Colocar esses métodos na interface
-    public void closeStatement(Statement statement) throws SQLException {
-        if (statement != null) statement.close();
-    }
-
-    public void closeResultSet(ResultSet resultSet) throws SQLException {
-        if (resultSet != null) resultSet.close();
     }
 }
