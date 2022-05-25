@@ -1,5 +1,7 @@
 package com.clean.architecture.integration;
 
+import com.clean.architecture.application.dao.OrderDAO;
+import com.clean.architecture.application.dao.OrderDAODatabase;
 import com.clean.architecture.application.dto.GetOrderOutput;
 import com.clean.architecture.application.dto.ItemInput;
 import com.clean.architecture.application.dto.PlaceOrderInput;
@@ -30,8 +32,9 @@ public class GetOrderTest {
     @Before
     public void init() throws SQLException {
         DatabaseConnector databaseConnection = new DatabaseConnectionAdapter();
+        OrderDAO orderDAO = new OrderDAODatabase(databaseConnection);
         placeOrder = new PlaceOrder(new DatabaseRepositoryFactory(databaseConnection));
-        getOrdersQuery = new GetOrdersQuery(databaseConnection);
+        getOrdersQuery = new GetOrdersQuery(orderDAO);
     }
 
     @Test
