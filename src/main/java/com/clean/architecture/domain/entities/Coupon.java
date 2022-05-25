@@ -36,6 +36,9 @@ public class Coupon {
         return !expireDate.isBefore(today);
     }
 
+    public String getCode() {
+        return code;
+    }
 
     @Override
     public String toString() {
